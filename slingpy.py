@@ -57,42 +57,48 @@ for key in apikeys:
         exit
     # list -> dict
     jsonOutput = r.json()
+    # try to convert json output to dict
     try:
       jsonDict = jsonOutput[0]
     except IndexError:
         print("User has no future shift. User must have a shift scheduled in the next 6 weeks.")
-    
+        print("Program will continue, however.")
+    else:
 
     # got the names here
     # nested dict
-    fname = jsonDict['user']['name']
-    lname = jsonDict['user']['lastname']
+      fname = jsonDict['user']['name']
+      lname = jsonDict['user']['lastname']
 
     # Now get next/current shift
     # Current shifts are shifts that have been clocked into but haven’t been clocked out of yet;
     # shifts that start within the next 6 hours; and at least one (first) shift in the next 4 weeks.
-    url = "https://api.sling.is/v1/shifts/current"
-    r = requests.get(url, headers=headers)
-    jsonOutput = r.json()
-    jsonDict = jsonOutput[0]
-
+      url = "https://api.sling.is/v1/shifts/current"
+      r = requests.get(url, headers=headers)
+      jsonOutput = r.json()
+    try:
+      jsonDict = jsonOutput[0]
+    except IndexError:
+        print("User has no future shift. User must have a shift scheduled in the next 6 weeks.")
+        print("Program will continue, however.")
+    else:
     # get shift start and shift end
-    shiftStart = jsonDict['dtstart']
-    shiftEnd = jsonDict['dtend']  
+      shiftStart = jsonDict['dtstart']
+      shiftEnd = jsonDict['dtend']  
 
     # thank stallman I don't have to deal with the full date
-    shiftStart = parser.parse(shiftStart)
-    shiftEnd = parser.parse(shiftEnd)
+      shiftStart = parser.parse(shiftStart)
+      shiftEnd = parser.parse(shiftEnd)
 
     # okay this is related to date.. pytz = py timezone?
-    today = datetime.now(pytz.utc)
+      today = datetime.now(pytz.utc)
     # if right now is after shift start but between shift end
     # eventually change the prints to editing a file or something
     # if user is currently working
-    if ( shiftStart < today < shiftEnd ):
-        f = open(os.path.join(sys.path[0], webFile), "a")
-        f.write("\n" + "echo " + "\"" + fname + " " + lname + "\"" + ";" + "\n" + "echo \"<br>\";")
-        f.close()
+      if ( shiftStart < today < shiftEnd ):
+          f = open(os.path.join(sys.path[0], webFile), "a")
+          f.write("\n" + "echo " + "\"" + fname + " " + lname + "\"" + ";" + "\n" + "echo \"<br>\";")
+          f.close()
 
 # Append end of php
 f = open(os.path.join(sys.path[0], webFile), "a")
