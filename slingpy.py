@@ -32,7 +32,7 @@ import sys
 # under "Request Headers" you can find authorization token
 
 # Create file "apikeys.txt" with each API key on it's own line
-apikeys = [line.rstrip('\n') for line in open("apikeys.txt")]
+apikeys = [line.rstrip('\n') for line in open(os.path.join(sys.path[0],"apikeys.txt"))]
 
 
 # File to insert in to php code
