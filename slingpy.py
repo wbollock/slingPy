@@ -40,7 +40,7 @@ webFile = "working.php"
 
 # clear webFile fresh
 f = open(os.path.join(sys.path[0], webFile), "w")
-f.write("<?php" + "\n" + "echo \"<br>\"" + ";" + "\n" + "echo \"Currently Working:\"" + ";" + "\n" + "echo \"<br>\"" + ";" + "\n")
+f.write("<?php" + "\n" + "echo \"<br>\"" + "\n" + "echo \"<br>\"" + ";" + "\n" + "echo \"Currently Working:\"" + ";" + "\n" + "echo \"<br>\"" + ";" + "\n")
 f.close()
 
 for key in apikeys:
