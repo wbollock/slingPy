@@ -4,6 +4,8 @@ Creating a schedule notifier (who is currently working) via the Sling Scheduler 
 
 Designed for inclusion into a PHP file.
 
+![example output](img/img.png)
+
 ## Requirements
 
 pip3 install -r requirements.txt
@@ -15,13 +17,15 @@ pip3 install -r requirements.txt
 E.g:
 
 apikey1
+
 apikey2
+
 apikey3
 
 
 2. Have a cron job run the program. 
 
-Every 30 min
+(Every 30 min)
 
 `*/30 * * * * support python3 /somedir/slingPy.py`
 
@@ -32,4 +36,5 @@ Every 30 min
 `<?php include 'slingPy/working.php'; ?>`
 
 (For OsTicket, add to ~ line 8 of footer.php.inc)
+
 (public_html/include/staff/footer.inc.php)
