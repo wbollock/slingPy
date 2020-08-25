@@ -1,4 +1,4 @@
-# slingPY
+# slingPy
 
 Creating a schedule notifier (who is currently working) via the Sling Scheduler API. No Premium API functions used.
 
