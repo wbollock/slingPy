@@ -96,22 +96,29 @@ for key in apikeys:
     # if user is currently working
       if ( shiftStart < today < shiftEnd ):
           # convert datetime to str to int
-          shiftStartstr = int(shiftStart.strftime("%H"))
-          shiftEndstr = int(shiftEnd.strftime("%H"))
+          shiftStartHR = int(shiftStart.strftime("%H"))
+          shiftEndHR = int(shiftEnd.strftime("%H"))
+
+          shiftStartMIN = str(shiftStart.strftime("%M"))
+          shiftEndMIN = str(shiftEnd.strftime("%M"))
 
           # convert away from military time
-          if shiftStartstr > 12:
-            shiftStartstr = shiftStartstr - 12
+          if shiftStartHR > 12:
+            shiftStartHR = shiftStartHR - 12
 
-          if shiftEndstr > 12:
-            shiftEndstr = shiftEndstr - 12
+          if shiftEndHR > 12:
+            shiftEndHR = shiftEndHR - 12
 
           # convert back to str for concat
-          shiftStartstr = str(shiftStartstr)
-          shiftEndstr = str(shiftEndstr)
+          shiftStartHR = str(shiftStartHR)
+          shiftEndHR = str(shiftEndHR)
 
           f = open(os.path.join(sys.path[0], webFile), "a")
-          f.write("\n" + "echo " + "\"" + fname + " " + lname  + " (" + shiftStartstr + " - " + shiftEndstr + ")" +  "\"" + ";" + "\n" + "echo \"<br>\";")
+          f.write("\n" + "echo " + "\"" + fname + " " + lname  + 
+          " (" + shiftStartHR + ":" + shiftStartMIN + 
+          " - " 
+          + shiftEndHR + ":" + shiftEndMIN + ")" +  "\"" 
+          + ";" + "\n" + "echo \"<br>\";")
           f.close()
 
 # Append end of php
