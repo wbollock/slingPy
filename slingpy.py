@@ -93,11 +93,25 @@ for key in apikeys:
     # okay this is related to date.. pytz = py timezone?
       today = datetime.now(pytz.utc)
     # if right now is after shift start but between shift end
-    # eventually change the prints to editing a file or something
     # if user is currently working
       if ( shiftStart < today < shiftEnd ):
+          # convert datetime to str to int
+          shiftStartstr = int(shiftStart.strftime("%H"))
+          shiftEndstr = int(shiftEnd.strftime("%H"))
+
+          # convert away from military time
+          if shiftStartstr > 12:
+            shiftStartstr = shiftStartstr - 12
+
+          if shiftEndstr > 12:
+            shiftEndstr = shiftEndstr - 12
+
+          # convert back to str for concat
+          shiftStartstr = str(shiftStartstr)
+          shiftEndstr = str(shiftEndstr)
+
           f = open(os.path.join(sys.path[0], webFile), "a")
-          f.write("\n" + "echo " + "\"" + fname + " " + lname + "\"" + ";" + "\n" + "echo \"<br>\";")
+          f.write("\n" + "echo " + "\"" + fname + " " + lname  + " (" + shiftStartstr + " - " + shiftEndstr + ")" +  "\"" + ";" + "\n" + "echo \"<br>\";")
           f.close()
 
 # Append end of php
