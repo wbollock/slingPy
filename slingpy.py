@@ -70,6 +70,8 @@ for key in apikeys:
       fname = jsonDict['user']['name']
       lname = jsonDict['user']['lastname']
 
+      
+
     # Now get next/current shift
     # Current shifts are shifts that have been clocked into but haven’t been clocked out of yet;
     # shifts that start within the next 6 hours; and at least one (first) shift in the next 4 weeks.
@@ -85,6 +87,8 @@ for key in apikeys:
     # get shift start and shift end
       shiftStart = jsonDict['dtstart']
       shiftEnd = jsonDict['dtend']  
+
+      position = jsonDict['position']['name']
 
     # thank stallman I don't have to deal with the full date
       shiftStart = parser.parse(shiftStart)
@@ -117,7 +121,8 @@ for key in apikeys:
           f.write("\n" + "echo " + "\"" + fname + " " + lname  + 
           " (" + shiftStartHR + ":" + shiftStartMIN + 
           " - " 
-          + shiftEndHR + ":" + shiftEndMIN + ")" +  "\"" 
+          + shiftEndHR + ":" + shiftEndMIN + ")" 
+          + " [" + position + "]" +  "\""
           + ";" + "\n" + "echo \"<br>\";")
           f.close()
 
