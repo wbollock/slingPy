@@ -89,6 +89,9 @@ for key in apikeys:
       shiftEnd = jsonDict['dtend']  
 
       position = jsonDict['position']['name']
+      # get first letter of each word in string
+      # https://stackoverflow.com/questions/41191424/extract-first-character-of-each-word-from-the-sentence-string/41191867
+      position = (''.join([x[0] for x in position.split()]))
 
     # thank stallman I don't have to deal with the full date
       shiftStart = parser.parse(shiftStart)
@@ -118,11 +121,11 @@ for key in apikeys:
           shiftEndHR = str(shiftEndHR)
 
           f = open(os.path.join(sys.path[0], webFile), "a")
-          f.write("\n" + "echo " + "\"" + fname + " " + lname  + 
+          f.write("\n" + "echo " + "\"" + fname + " " + lname
+          + " [" + position + "]" +
           " (" + shiftStartHR + ":" + shiftStartMIN + 
           " - " 
-          + shiftEndHR + ":" + shiftEndMIN + ")" 
-          + " [" + position + "]" +  "\""
+          + shiftEndHR + ":" + shiftEndMIN + ")" +  "\""
           + ";" + "\n" + "echo \"<br>\";")
           f.close()
 
