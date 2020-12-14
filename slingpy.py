@@ -60,7 +60,9 @@ for key in apikeys:
     # try to convert json output to dict
     try:
       jsonDict = jsonOutput[0]
-    except IndexError:
+    except:
+        print(key)
+        print("Test")
         print("User has no future shift. User must have a shift scheduled in the next 6 weeks.")
         print("Program will continue, however.")
     else:
