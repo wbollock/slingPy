@@ -62,7 +62,6 @@ for key in apikeys:
       jsonDict = jsonOutput[0]
     except:
         print(key)
-        print("Test")
         print("User has no future shift. User must have a shift scheduled in the next 6 weeks.")
         print("Program will continue, however.")
     else:
@@ -82,7 +81,8 @@ for key in apikeys:
       jsonOutput = r.json()
     try:
       jsonDict = jsonOutput[0]
-    except IndexError:
+    except:
+        print(key)
         print("User has no future shift. User must have a shift scheduled in the next 6 weeks.")
         print("Program will continue, however.")
     else:
